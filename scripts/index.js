@@ -1,42 +1,40 @@
 //   COUNTDOWN TIMER
 
-// 1. Set valid end date
-// need to get the amount of time user is inputting we will begin with 25 minutes
+// Configure buttons to work in coordinance with function
+// Once function is done, reset
 
+// Get current time 
 var now = new Date().getTime();
+// Get deadline time (timer + current time)
 var minutes = document.querySelector("#minutes").innerHTML;
 var seconds = document.querySelector("#seconds").innerHTML;
 
-var deadline = now + pomadoro(minutes, seconds);
-var remainingTime = deadline - now;
-
-function pomadoro(min, sec) {
-    var pom = (min * 60000) + (sec * 1000);
-    return pom;
-}
-
-console.log(pomadoro(25, 10));
-
-function startCountdown(time) {
-    var counter = time;
+function startCountdown() {
+    var counterMin = document.querySelector('#minutes').innerHTML;
+    var counterSec = document.querySelector('#seconds').innerHTML;
 
     var interval = setInterval(() => {
-        console.log(counter);
-        counter--;
+        document.querySelector("#seconds").innerHTML = counterSec;
+        counterSec--;
 
-    if(counter < 0) {
-        console.log('function');
-
-        clearInterval(interval);
-        console.log('Ding!');
-        };
-    }, 1000);
+        if(counterSec <= 1 && counterMin >= 1) {
+                console.log(counterSec);
+            counterMin--;
+            document.querySelector("#minutes").innerHTML = counterMin;
+            console.log(counterMin);
+            counterSec = 60;
+            console.log("it's been a hot minute");      
+        } else if (counterSec <= 1 && counterMin < 1) {
+            console.log("time is up");
+            document.querySelector("#seconds").innerHTML = 00;
+            document.querySelector("#minutes").innerHTML = 00;
+            clearInterval(interval);
+            console.log('ding');
+        } 
+        }, 1000);
 };
 
-startCountdown(seconds);
+// 
+startCountdown();
 
-// 2. Calculate time remaining 
-// 3. Convert time to a usable format 
-// 4. output the clock data as a reusable object
-// 5. Display the clock on the page, and stop the clock when it reaches zero 
 

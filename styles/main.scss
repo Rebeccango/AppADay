@@ -7,15 +7,27 @@
         $primary: black;
         $secondary: yellowgreen;
         $tertiary: indianred;
+    // Font 
+        $font-fam: 'Just Another Hand', cursive;
 
 body {
     text-align: center;
+    font-family: $font-fam;
+    color: rgb(97, 49, 15);
     background-image: url('https://images.unsplash.com/photo-1479150928156-423a69d91fe0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
     background-size: cover;
     background-position: cover;
     background-repeat: no-repeat;
     padding: 2rem;
 }
+
+.title {
+    font-size: 4rem;
+    margin: 4rem auto;
+    width: 80%;
+    border-bottom: solid 4px  rgb(97, 49, 15);
+}
+
 #message {
     color: $primary;
     font-size: 50px;
@@ -24,6 +36,22 @@ body {
 
 #timer {
     font-size: 200px;
-    line-height: 1;
+    line-height: 0.5;
     margin-bottom: 40px;
 }
+
+.container {
+    padding: 1rem;
+    background-color: rgba(white, 0.6);
+}
+
+button {
+    background-color: transparent;
+    border-style: none;
+}
+
+    .fas {
+        width: 100px;
+        color: rgb(58, 52, 48);
+        box-sizing: content-box; 
+    }
