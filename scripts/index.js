@@ -2,16 +2,13 @@
 
 // Configure buttons to work in coordinance with function
 // Once function is done, reset
+var setMin = document.querySelector("#minutes").innerHTML;
+var setSec = document.querySelector("#seconds").innerHTML;
 
-// Get current time 
-var now = new Date().getTime();
-// Get deadline time (timer + current time)
-var minutes = document.querySelector("#minutes").innerHTML;
-var seconds = document.querySelector("#seconds").innerHTML;
 
 function startCountdown() {
-    var counterMin = document.querySelector('#minutes').innerHTML;
-    var counterSec = document.querySelector('#seconds').innerHTML;
+    var counterMin = setMin;
+    var counterSec = setSec;
 
     var interval = setInterval(() => {
         document.querySelector("#seconds").innerHTML = counterSec;
@@ -30,11 +27,26 @@ function startCountdown() {
             document.querySelector("#minutes").innerHTML = 00;
             clearInterval(interval);
             console.log('ding');
-        } 
+            }
         }, 1000);
 };
 
-// 
-startCountdown();
+// button controls 
+    // start countdown
+var startBtn = document.querySelector("#start");
+    startBtn.addEventListener("click", startCountdown);
 
+    //pause countdown 
+var stopBtn = document.querySelector("#stop");
+
+stopBtn.addEventListener("click", () => {
+        pause? false : true;
+        console.log(pause);
+    });
+
+    //reset
+var resetBtn = document.querySelector("#reset");
+    resetBtn.addEventListener("click", () => {
+        location.reload();
+    });
 
