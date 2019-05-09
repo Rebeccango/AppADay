@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  border: solid darkgray 4px;
+  background-color: smokewhite;
+  display: inline-block;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.board .container {
+  display: block;
+}
+
+.board .container .square {
+  border: solid darkgray 4px;
+  background-color: smokewhite;
+  display: inline-block;
+  width: 250px;
+  height: 250px;
+}
+/*# sourceMappingURL=TicTacToe.css.map */

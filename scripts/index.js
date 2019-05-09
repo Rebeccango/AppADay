@@ -14,15 +14,15 @@ function startCountdown() {
         document.querySelector("#seconds").innerHTML = counterSec;
         counterSec--;
 
-        if(counterSec <= 1 && counterMin >= 1) {
+        if(counterSec <= 1 && counterMin >= 1 && pause === false) {
                 console.log(counterSec);
             counterMin--;
             document.querySelector("#minutes").innerHTML = counterMin;
             console.log(counterMin);
             counterSec = 60;
             console.log("it's been a hot minute");      
-        } else if (counterSec <= 1 && counterMin < 1) {
-            console.log("time is up");
+        } else if (counterSec <= 1 && counterMin < 1 && pause === false) {
+            console.log("time is up");  
             document.querySelector("#seconds").innerHTML = 00;
             document.querySelector("#minutes").innerHTML = 00;
             clearInterval(interval);
@@ -38,10 +38,11 @@ var startBtn = document.querySelector("#start");
 
     //pause countdown 
 var stopBtn = document.querySelector("#stop");
-
+var pause = false;
 stopBtn.addEventListener("click", () => {
-        pause? false : true;
-        console.log(pause);
+        console.log(`before: ${pause}`)
+        pause? pause = false : pause = true;
+        console.log(`after: ${pause}`)
     });
 
     //reset

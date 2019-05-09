@@ -1,0 +1,30 @@
+//Variables
+
+    //styles
+
+@mixin border{
+    border: solid darkgray 4px;
+    background-color: smokewhite;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.board {
+    @include border;
+    display: inline-block;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    // this will need to change to display flex 
+    .container {
+        display: block;
+        .square {
+            @include border;
+            display: inline-block;
+            width: 250px;
+            height: 250px;
+        }
+    }
+}
