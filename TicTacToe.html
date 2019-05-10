@@ -8,27 +8,38 @@
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
+    <header>
+        <h1>Tic-Tac-Toe</h1>
+    </header>
     <main>
-        <header><h1>Tic-Tac-Toe</h1></header>
-        <div class="board">
-            <span class = container>
-                <div class="square row-1 col-1"></div>
-                <div class="square row-1 col-2"></div>
-                <div class="square row-1 col-3"></div>
-            </span>
+        <div class="id">
+            <p>Would you like to be X or O?</p>
+            <label for="x">
+                X <input type="radio" id="x"/>
+            </label>
 
-            <span class = container>
-                <div class="square row-2 col-1"></div>
-                <div class="square row-2 col-2"></div>
-                <div class="square row-2 col-3"></div>
+            <label for="o">
+                O <input type="radio" id="o"/>
+            </label>
+        </div>
+        <div class="game-board">
+            <span class="row">
+                <div id="one" class="game-field"></div>
+                <div id="two" class="game-field"></div>
+                <div id="three" class="game-field"></div>
             </span>
-
-            <span class= container>
-                <div class="square row-3 col-1"></div>
-                <div class="square row-3 col-2"></div>
-                <div class="square row-3 col-3"></div>
+            <span class="row">
+                <div id="four" class="game-field"></div>
+                <div id="five" class="game-field"></div>
+                <div id="six" class="game-field"></div>
+            </span>
+            <span class="row">
+                <div id="seven" class="game-field"></div>
+                <div id="eight" class="game-field"></div>
+                <div id="nine" class="game-field"></div>
             </span>
         </div>
     </main>
+    <script src="./scripts/TicTacToe.js"></script>
 </body>
 </html>

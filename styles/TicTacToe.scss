@@ -12,19 +12,16 @@
     padding: 0;
 }
 
-.board {
-    @include border;
-    display: inline-block;
-    flex-flow: row wrap;
-    box-sizing: border-box;
-    // this will need to change to display flex 
-    .container {
+.game-board {
+    .row {
         display: block;
-        .square {
-            @include border;
-            display: inline-block;
-            width: 250px;
-            height: 250px;
-        }
+    }
+    .game-field {
+      display: inline-block;    
+      width: 100px;
+      height: 100px;
+      background-color: powderblue;
+    }
+    &:nth-child(even) {
     }
 }
