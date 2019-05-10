@@ -10,19 +10,38 @@ var game = {
 var userConfig = document.getElementById("config-form").elements.user;
 var form = document.getElementById("config-form");
 
-document.forms["config-form"].onsubmit = userSelect();
+form.onsubmit = userSelect;
 
-function userSelect() { 
+function userSelect(event) { 
+    event.preventDefault();
     if(userConfig[0].checked === true) {
-     game.user = userConfig[0].value;
-     return console.log(game.user);
-    } else if (userConfig[1].checked === true) {
-     game.user = userConfig[1].value;
-     return console.log(game.user);
-    } else {
-     return console.log('waiting for player selection');
+    game.user = userConfig[0].id;
+    game.computer = userConfig[1].id;
+    } 
+    else if (userConfig[1].checked === true) {
+    game.user = userConfig[1].id;
+    game.computer = userConfig[0].id;
     }
-};
+    firstPlayer();
+    return console.log(game);
+}
+
+// Now I need to know who will want to start, maybe implement a rock/paper scissor function 
+function firstPlayer(answer) {
+    let options = ["r", "p", "s"],
+    userAns = prompt("rock, paper, or scissors?").charAt(0),
+    cpuAns = Math.random();
+
+    if(userAns !== ("r" || "p" || "s")) {
+        console.log("need new answer");
+        window.alert("..that's not a valid option, please select again");
+        userAns = prompt("rock, paper, or scissors?").charAt(0);
+    } else {
+      console.log("halp");
+    }
+    //will need to validate the answer of the input
+    console.log('need to determine who goes first');
+}
 
 
 // userConfig.forEach( button =>{if(button ===)})
