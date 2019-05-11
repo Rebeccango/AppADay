@@ -16,8 +16,8 @@
         <form id="config-form" name="config-form">
             <p>Would you like to be X or O?</p>
             <label for="x"> X <input type="radio" name="user" id="X" value="X"/></label>
-            <label for="o">O <input type="radio" name="user" id="O" value="O"/></label>
-            <input type="submit" value="Let's Go"/>
+            <label for="o"> O <input type="radio" name="user" id="O" value="O"/></label>
+            <input id="submit" type="submit" value="Let's Go"/>
         </form>
     </div>
     <main>
@@ -38,6 +38,7 @@
                 <div id="nine" class="game-field"></div>
             </span>
         </div>
+        <button id="restartBtn">Restart</button>
     </main>
     <script src="./scripts/TicTacToe.js"></script>
 </body>

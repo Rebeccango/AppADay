@@ -7,15 +7,32 @@
 body {
   text-align: center;
   background-color: brown;
+  padding: 2rem;
 }
 
 body h1 {
   font-size: 4rem;
 }
 
+body h1, body p {
+  margin: 1rem;
+}
+
+form input {
+  margin-right: 2rem;
+}
+
+form #submit {
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border-style: none;
+}
+
 .game-board {
   border-radius: 4px;
-  margin: 2rem;
+  margin: 2.5rem;
   display: inline-block;
 }
 
@@ -25,10 +42,27 @@ body h1 {
 
 .game-board .game-field {
   display: inline-block;
-  outline: 8px solid burlywood;
+  outline: 8px solid black;
+  border-radius: 5px;
   width: 100px;
   height: 100px;
   background-color: powderblue;
+}
+
+.game-field:hover {
+  background-color: grey;
+}
+
+#restartBtn {
+  display: block;
+  position: fixed;
+  left: 50vw;
+  bottom: 1rem;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding: 0.25rem;
+  border-radius: 4px;
+  border-style: none;
 }
 
 .cpu-turn {

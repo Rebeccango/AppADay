@@ -7,7 +7,6 @@ var game = {
 };
 
 //Set game configuration for user ( x or o)
-
 var userConfig = document.getElementById("config-form").elements.user;
 var form = document.getElementById("config-form");
 
@@ -65,24 +64,20 @@ function firstPlayer(response) {
         firstPlayer(userAns);
     } else if(userAns === options[0] && cpuAns === options[1]) {
         game.currentPlayer = "user";
-        // console.log(game.currentPlayer);
         window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
         return console.log("user wins, user gets to move first");
     }
     else if(userAns === options[1] && cpuAns === options[0]) {
         game.currentPlayer = "user";
-        // console.log(game.currentPlayer);
         window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
         return console.log("user wins, user gets to move first");
     }
     else if(userAns === options[2] && cpuAns === options[1]) {
         game.currentPlayer = "user";
-        // console.log(game.currentPlayer);
         window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
         return console.log("user wins, user gets to move first");
     } else{
         game.currentPlayer = "computer";
-        // console.log(game.currentPlayer);
         window.alert(`${game.currentPlayer} won! You will go second`);
         return console.log("userLoses, computer gets to go first");
     };    
@@ -90,6 +85,7 @@ function firstPlayer(response) {
 
 function firstMove(player) {
 var gamefield = document.getElementById('game-board');
+gamefield.addEventListener('click', () => {console.log("it worked")});
  console.log('this is the first move, does it differ from the second or third move?');
 
 
