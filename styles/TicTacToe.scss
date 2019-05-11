@@ -13,16 +13,39 @@
     font-family: 'Baloo Bhai', cursive;
 }
 
+body {
+    text-align: center;
+    background-color: brown;
+
+    h1 {
+    font-size: 4rem;
+    }
+}
+
 .game-board {
+    // border: burlywood solid 10px;
+    border-radius: 4px;
+    margin: 2rem;
+    display: inline-block;
+
     .row {
-        display: block;
+    display: block;
     }
     .game-field {
       display: inline-block;    
+      outline: 8px solid burlywood;
       width: 100px;
       height: 100px;
       background-color: powderblue;
     }
-    &:nth-child(even) {
-    }
+}
+
+//-------------
+.cpu-turn {
+    user-select: none;
+    background-image: linear-gradient(rgba(5, 5, 5, 0.5),  rgba(5, 5, 5, 0.5)),
+}
+
+.hidden {
+    display: none;
 }

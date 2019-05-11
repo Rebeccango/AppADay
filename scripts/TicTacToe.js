@@ -3,6 +3,7 @@ var game = {
     computer: "",
     currentPlayer: "",
     moves: 1,
+    gamefield: [],
 };
 
 //Set game configuration for user ( x or o)
@@ -23,65 +24,89 @@ function userSelect(event) {
     game.computer = userConfig[0].id;
     }
     var userAns = prompt("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0);
+    form.reset();
+    form.classList.add('hidden');
     firstPlayer(userAns);
-    return console.log(game);
+    firstMove(game.currentPlayer);
+    return console.log(`this is the userSelect function`);
 }
 
 // Now I need to know who will want to start, maybe implement a rock/paper scissor function 
 function firstPlayer(response) {
-    let options = ["rock", "paper", "scissors"],
+    var options = ["rock", "paper", "scissors"],
         cpuAns = options[Math.floor(Math.random()*Math.floor(3))];
-    
-    console.log(`itial useransr value ${response}`);
-    
+        
     switch(response) {
         case 'r':
-        userAns = 'rock';
-        console.log(userAns);
+        userAns = options[0];
+        console.log(`${userAns} vs. ${cpuAns}`);
         break;
 
         case 'p':
-        userAns = 'paper';
-        console.log(userAns);
+        userAns = options[1];
+        console.log(`${userAns} vs. ${cpuAns}`);
         break;
 
         case 's':
-        userAns = 'scissors';
-        console.log(userAns);
+        userAns = options[2];
+        console.log(`${userAns} vs. ${cpuAns}`);
         break;
 
         default: 
         window.alert("invalid response -- need new answer");
-        userAns = prompt("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0);
+        userAns = "";
+        userAns = alert("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0);
         firstPlayer(userAns);
     }
 
-
-//     options.forEach( option => { 
-//        if(option.charAt(0) === userAns){
-//         // userAns = option;
-//         console.log(userAns);
-//    }});
+    if(userAns === cpuAns){
+        window.alert("its a draw");
+        userAns = prompt("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0) || "";
+        firstPlayer(userAns);
+    } else if(userAns === options[0] && cpuAns === options[1]) {
+        game.currentPlayer = "user";
+        // console.log(game.currentPlayer);
+        window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
+        return console.log("user wins, user gets to move first");
+    }
+    else if(userAns === options[1] && cpuAns === options[0]) {
+        game.currentPlayer = "user";
+        // console.log(game.currentPlayer);
+        window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
+        return console.log("user wins, user gets to move first");
+    }
+    else if(userAns === options[2] && cpuAns === options[1]) {
+        game.currentPlayer = "user";
+        // console.log(game.currentPlayer);
+        window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
+        return console.log("user wins, user gets to move first");
+    } else{
+        game.currentPlayer = "computer";
+        // console.log(game.currentPlayer);
+        window.alert(`${game.currentPlayer} won! You will go second`);
+        return console.log("userLoses, computer gets to go first");
+    };    
 }
- // need to determine who won that game
-//  if(userAns === cpuAns){
-//      window.alert("It's a draw!...make function to handle this case")
-//  }
-//  else if(userAns === "r" && cpuAns === "s" ) {
-//      window.alert ("you won! you get to go first!");
-//  }
-//  else if(userAns === "p" && cpuAns === "r" ) {
-//     window.alert ("you won! you get to go first!");
-// }
-// else if(userAns === "s" && cpuAns === "p" ) {
-//     window.alert ("you won! you get to go first!");
-// }
-// else {
-//     window.alert("Sorry, you lost! Computer will go first");
-//     }
+
+function firstMove(player) {
+var gamefield = document.getElementById('game-board');
+ console.log('this is the first move, does it differ from the second or third move?');
 
 
-// userConfig.forEach( button =>{if(button ===)})
+ if(player === "computer") {
+    console.log("we will need to make the field unselectable and we will need to create a function that selects a position the computer can go")
+    gamefield.classList.add("cpu-turn");
+    game.CurrentPlayer = "user";
+  } else if(player === "user") {
+    console.log("make field selectable and change class to select");
+    gamefield.classList.remove("cpu-turn");
+    game.CurrentPlayer = "computer";
+  }
+}
+
+function markfield(event) {
+    
+}
 
 
 // ===============================================================

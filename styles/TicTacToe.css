@@ -4,14 +4,43 @@
   font-family: 'Baloo Bhai', cursive;
 }
 
+body {
+  text-align: center;
+  background-color: brown;
+}
+
+body h1 {
+  font-size: 4rem;
+}
+
+.game-board {
+  border-radius: 4px;
+  margin: 2rem;
+  display: inline-block;
+}
+
 .game-board .row {
   display: block;
 }
 
 .game-board .game-field {
   display: inline-block;
+  outline: 8px solid burlywood;
   width: 100px;
   height: 100px;
   background-color: powderblue;
+}
+
+.cpu-turn {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(5, 5, 5, 0.5)), to(rgba(5, 5, 5, 0.5)));
+  background-image: linear-gradient(rgba(5, 5, 5, 0.5), rgba(5, 5, 5, 0.5));
+}
+
+.hidden {
+  display: none;
 }
 /*# sourceMappingURL=TicTacToe.css.map */
