@@ -37,7 +37,9 @@ form #submit {
 }
 
 .game-board .row {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .game-board .game-field {

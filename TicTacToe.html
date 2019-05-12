@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./styles//TicTacToe.css"/>
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
@@ -15,7 +16,12 @@
     <div id="game-config" class="id">
         <form id="config-form" name="config-form">
             <p>Would you like to be X or O?</p>
-            <label for="x"> X <input type="radio" name="user" id="X" value="X"/></label>
+            <label for="x"> X 
+                <input  type="radio" 
+                        name="user" 
+                        id="X" 
+                        value="X"/>
+            </label>
             <label for="o"> O <input type="radio" name="user" id="O" value="O"/></label>
             <input id="submit" type="submit" value="Let's Go"/>
         </form>
@@ -23,7 +29,9 @@
     <main>
         <div id="game-board" class=game-board>
             <span class="row">
-                <div id="one" class="game-field"></div>
+                <div id="one" class="game-field">
+                    <!-- <i class="fas fa-times fa-5x"></i> -->
+                </div>
                 <div id="two" class="game-field"></div>
                 <div id="three" class="game-field"></div>
             </span>

@@ -16,6 +16,7 @@ function userSelect(event) {
     event.preventDefault();
     if(userConfig[0].checked === true) {
     game.user = userConfig[0].id;
+    game.user = userConfig[0].id;
     game.computer = userConfig[1].id;
     } 
     else if (userConfig[1].checked === true) {
@@ -87,16 +88,41 @@ function firstMove(player) {
 var gamefield = document.getElementById('game-board');
 gamefield.addEventListener('click', () => {console.log("it worked")});
  console.log('this is the first move, does it differ from the second or third move?');
-
+ console.log(player);
 
  if(player === "computer") {
     console.log("we will need to make the field unselectable and we will need to create a function that selects a position the computer can go")
     gamefield.classList.add("cpu-turn");
+    //---------------document onClick here
+    gamefield.onclick = function(evt) {
+        console.log("this is the newly added function");
+        var evt = window.event || evt; // window.event for IE
+        if (!evt.target) evt.target = evt.srcElement; // extend target property for IE
+        var gameFieldselect = evt.target.id; // target is clicked
+        // need to write functon to validate if move is legal and to locate that on the page and set child element ( span containing)
+        console.log(gameFieldselect);
+        gameFieldselect.innerHTML = "X";
+        }    
     game.CurrentPlayer = "user";
+    console.log(player);
+    // firstMove(game.CurrentPlayer);
+    // this statement ends up in an infinit loop
   } else if(player === "user") {
     console.log("make field selectable and change class to select");
     gamefield.classList.remove("cpu-turn");
+    //---------------document onClick here
+    gamefield.onclick = function(evt) {
+        console.log("this is the newly added function");
+        var evt=window.event || evt; // window.event for IE
+        if (!evt.target) evt.target=evt.srcElement; // extend target property for IE
+        var gameFieldselect = evt.target.id; // target is clicked
+        gameFieldselect.innerHTML = "X";
+        console.log(gameFieldselect);
+        evt.target.innerHTML = "X";
+        console.log(evt.target.innerHTML);
+      }
     game.CurrentPlayer = "computer";
+    console.log(player);
   }
 }
 
@@ -104,6 +130,8 @@ function markfield(event) {
     
 }
 
+var resetBtn = document.getElementById("restartBtn"); 
+    resetBtn.onclick = (event)=> { location.reload()};
 
 // ===============================================================
 
