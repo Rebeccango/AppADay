@@ -101,10 +101,11 @@ gamefield.addEventListener('click', () => {console.log("it worked")});
         var gameFieldselect = evt.target.id; // target is clicked
         // need to write functon to validate if move is legal and to locate that on the page and set child element ( span containing)
         console.log(gameFieldselect);
-        gameFieldselect.innerHTML = "X";
+        evt.target.innerHTML = player;
+        game.currentPlayer = "user";
+        console.log(game.currentPlayer);
+        firstMove(game.currentPlayer);
         }    
-    game.CurrentPlayer = "user";
-    console.log(player);
     // firstMove(game.CurrentPlayer);
     // this statement ends up in an infinit loop
   } else if(player === "user") {
@@ -116,13 +117,13 @@ gamefield.addEventListener('click', () => {console.log("it worked")});
         var evt=window.event || evt; // window.event for IE
         if (!evt.target) evt.target=evt.srcElement; // extend target property for IE
         var gameFieldselect = evt.target.id; // target is clicked
-        gameFieldselect.innerHTML = "X";
         console.log(gameFieldselect);
-        evt.target.innerHTML = "X";
+        evt.target.innerHTML = player;
         console.log(evt.target.innerHTML);
+        game.currentPlayer = "computer";
+        console.log(game.currentPlayer);
+        firstMove(game.currentPlayer);
       }
-    game.CurrentPlayer = "computer";
-    console.log(player);
   }
 }
 
