@@ -10,12 +10,12 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Baloo Bhai', cursive;
+    font-family: 'Baloo Bhai', cursive; 
 }
 
 body {
     text-align: center;
-    background-color: brown;
+    background-color: cadetblue;
     padding: 2rem;
 
     h1 {
@@ -86,4 +86,9 @@ form {
 
 .hidden {
     display: none;
+}
+
+.select {
+    text-align:center;
+    vertical-align: center;
 }

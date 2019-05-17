@@ -6,7 +6,7 @@
 
 body {
   text-align: center;
-  background-color: brown;
+  background-color: cadetblue;
   padding: 2rem;
 }
 
@@ -78,5 +78,10 @@ form #submit {
 
 .hidden {
   display: none;
+}
+
+.select {
+  text-align: center;
+  vertical-align: center;
 }
 /*# sourceMappingURL=TicTacToe.css.map */

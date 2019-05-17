@@ -3,7 +3,17 @@ var game = {
     computer: "",
     currentPlayer: "",
     moves: 1,
-    gamefield: [],
+    gamefield: {
+        one:'',
+        two:'',
+        three: '',
+        four: '',
+        five:'',
+        six: '',
+        seven: '',
+        eight: '',
+        nine: '',
+    },
 };
 
 //Set game configuration for user ( x or o)
@@ -105,6 +115,8 @@ gamefield.addEventListener('click', () => {console.log("it worked")});
         game.currentPlayer = "user";
         console.log(game.currentPlayer);
         firstMove(game.currentPlayer);
+        game.moves++;
+        console.log(game.moves);
         }    
     // firstMove(game.CurrentPlayer);
     // this statement ends up in an infinit loop
@@ -123,6 +135,8 @@ gamefield.addEventListener('click', () => {console.log("it worked")});
         game.currentPlayer = "computer";
         console.log(game.currentPlayer);
         firstMove(game.currentPlayer);
+        game.moves++;
+        console.log(game.moves);
       }
   }
 }
