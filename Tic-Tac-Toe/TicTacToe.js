@@ -1,199 +1,205 @@
-var game = {
+var gameState = {
     user: "",
     computer: "",
-    currentPlayer: "",
-    moves: 1,
-    gamefield: {
-        one:'',
-        two:'',
-        three: '',
-        four: '',
-        five:'',
-        six: '',
-        seven: '',
-        eight: '',
-        nine: '',
-    },
+    currentPlayer: "X", //default is the user 
+    moves: 0,
+    gamefield: [],
+    gameBoard: {
+        "one": "",
+        "two": "",
+        "three": "",
+        "four":"",
+        "five":"",
+        "six": "",
+        "seven": "",
+        "eight":"",
+        "nine":""
+    }
+};      
+
+var title = document.getElementById("title");   
+var form = document.getElementById("config-form"),
+ gamefield = document.getElementById("game-board");
+
+document.getElementById("restartBtn").onclick = () => { location.reload();};
+
+form.onsubmit = (event) => {
+event.preventDefault();
+
+if(document.getElementById("X").checked) {
+    gameState.user  = "X";
+    gameState.computer = "O";
+} else {
+    gameState.user  = "O";
+    gameState.computer = "X";
+}
+form.reset();
+form.classList.add('hidden');
+document.getElementById('gameConfigForm').classList.add('hidden');
+gamefield.classList.remove('hidden');
+var answer = prompt("Rock,paper or scissors?").charAt(0);
+console.log(answer);
+firstPlayer(answer);
 };
 
-//Set game configuration for user ( x or o)
-var userConfig = document.getElementById("config-form").elements.user;
-var form = document.getElementById("config-form");
+function firstPlayer(ans) {
+var options = ["rock", "paper", "scissors"],
+cpuAns = options[Math.floor(Math.random()*Math.floor(3))];
 
-form.onsubmit = userSelect;
+switch(ans) {
+    case 'r':
+    userAns = options[0];
+    console.log(`${userAns} vs. ${cpuAns}`);
+    break;
 
-function userSelect(event) { 
-    event.preventDefault();
-    if(userConfig[0].checked === true) {
-    game.user = userConfig[0].id;
-    game.user = userConfig[0].id;
-    game.computer = userConfig[1].id;
-    } 
-    else if (userConfig[1].checked === true) {
-    game.user = userConfig[1].id;
-    game.computer = userConfig[0].id;
-    }
-    var userAns = prompt("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0);
-    form.reset();
-    form.classList.add('hidden');
+    case 'p':
+    userAns = options[1];
+    console.log(`${userAns} vs. ${cpuAns}`);
+    break;
+
+    case 's':
+    userAns = options[2];
+    console.log(`${userAns} vs. ${cpuAns}`);
+    break;
+
+    default: 
+    window.alert("invalid response -- need new answer");
+    userAns = "";
+    userAns = alert("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0);
     firstPlayer(userAns);
-    firstMove(game.currentPlayer);
-    return console.log(`this is the userSelect function`);
 }
 
-// Now I need to know who will want to start, maybe implement a rock/paper scissor function 
-function firstPlayer(response) {
-    var options = ["rock", "paper", "scissors"],
-        cpuAns = options[Math.floor(Math.random()*Math.floor(3))];
-        
-    switch(response) {
-        case 'r':
-        userAns = options[0];
-        console.log(`${userAns} vs. ${cpuAns}`);
-        break;
-
-        case 'p':
-        userAns = options[1];
-        console.log(`${userAns} vs. ${cpuAns}`);
-        break;
-
-        case 's':
-        userAns = options[2];
-        console.log(`${userAns} vs. ${cpuAns}`);
-        break;
-
-        default: 
-        window.alert("invalid response -- need new answer");
-        userAns = "";
-        userAns = alert("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0);
-        firstPlayer(userAns);
-    }
-
-    if(userAns === cpuAns){
-        window.alert("its a draw");
-        userAns = prompt("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0) || "";
-        firstPlayer(userAns);
-    } else if(userAns === options[0] && cpuAns === options[1]) {
-        game.currentPlayer = "user";
-        window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
-        return console.log("user wins, user gets to move first");
-    }
-    else if(userAns === options[1] && cpuAns === options[0]) {
-        game.currentPlayer = "user";
-        window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
-        return console.log("user wins, user gets to move first");
-    }
-    else if(userAns === options[2] && cpuAns === options[1]) {
-        game.currentPlayer = "user";
-        window.alert(`${game.currentPlayer} won! Make your first move by selecting an available field below`);
-        return console.log("user wins, user gets to move first");
-    } else{
-        game.currentPlayer = "computer";
-        window.alert(`${game.currentPlayer} won! You will go second`);
-        return console.log("userLoses, computer gets to go first");
-    };    
+if(userAns === cpuAns){
+    window.alert("its a draw");
+    userAns = prompt("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0) || "";
+    firstPlayer(userAns);
+} else if(userAns === options[0] && cpuAns === options[1]) {
+    gameState.currentPlayer = gameState.user;
+    window.alert(`${gameState.currentPlayer} won! Make your first move by selecting an available field below`);
+    return console.log("user wins, user gets to move first");
+}
+else if(userAns === options[1] && cpuAns === options[0]) {
+    gameState.currentPlayer = gameState.user;
+    window.alert(`${gameState.currentPlayer} won! Make your first move by selecting an available field below`);
+    return console.log("user wins, user gets to move first");
+}
+else if(userAns === options[2] && cpuAns === options[1]) {
+    gameState.currentPlayer =  gameState.user;
+    window.alert(`${gameState.currentPlayer} won! Make your first move by selecting an available field below`);
+    return console.log("user wins, user gets to move first");
+} else{
+    gameState.currentPlayer = gameState.computer;
+    window.alert(`${gameState.currentPlayer} won! You will go second`);
+    return console.log("userLoses, computer gets to go first");
+};    
 }
 
-function firstMove(player) {
-var gamefield = document.getElementById('game-board');
-gamefield.addEventListener('click', () => {console.log("it worked")});
- console.log('this is the first move, does it differ from the second or third move?');
- console.log(player);
+turn(gameState.currentPlayer);
 
- if(player === "computer") {
-    console.log("we will need to make the field unselectable and we will need to create a function that selects a position the computer can go")
-    gamefield.classList.add("cpu-turn");
-    //---------------document onClick here
-    gamefield.onclick = function(evt) {
-        console.log("this is the newly added function");
-        var evt = window.event || evt; // window.event for IE
-        if (!evt.target) evt.target = evt.srcElement; // extend target property for IE
-        var gameFieldselect = evt.target.id; // target is clicked
-        // need to write functon to validate if move is legal and to locate that on the page and set child element ( span containing)
-        console.log(gameFieldselect);
-        evt.target.innerHTML = player;
-        game.currentPlayer = "user";
-        console.log(game.currentPlayer);
-        firstMove(game.currentPlayer);
-        game.moves++;
-        console.log(game.moves);
-        }    
-    // firstMove(game.CurrentPlayer);
-    // this statement ends up in an infinit loop
-  } else if(player === "user") {
-    console.log("make field selectable and change class to select");
-    gamefield.classList.remove("cpu-turn");
-    //---------------document onClick here
-    gamefield.onclick = function(evt) {
-        console.log("this is the newly added function");
-        var evt=window.event || evt; // window.event for IE
-        if (!evt.target) evt.target=evt.srcElement; // extend target property for IE
-        var gameFieldselect = evt.target.id; // target is clicked
-        console.log(gameFieldselect);
-        evt.target.innerHTML = player;
-        console.log(evt.target.innerHTML);
-        game.currentPlayer = "computer";
-        console.log(game.currentPlayer);
-        firstMove(game.currentPlayer);
-        game.moves++;
-        console.log(game.moves);
-      }
-  }
+
+function turn(currentPlayer) {
+gamefield.addEventListener('click', () => {
+    var evt = window.event || evt; 
+    !evt.target ? evt.target : evt.srcElement;
+    var gamefieldselect = evt.target.id;
+// console.log(evt.target.id);
+var selection = evt.target.id;
+if(gameState.gamefield.includes(selection)) {
+    window.alert("you can't move there");
+    //I can use object method to deduct game values array.
+} 
+else {
+    addMark(selection, gameState.currentPlayer);
+    gameState.gamefield.push(gamefieldselect);
+    gameState.gameBoard[gamefieldselect] = gameState.currentPlayer;
+    console.log(gameState.gameBoard);
+}
+gameState.currentPlayer === "O"? gameState.currentPlayer = "X" : gameState.currentPlayer = "O";
+gameState.moves++;
+gameState.moves > 5 ? confirmWin() : console.log("continue playing");
+if(gameState.moves === 9) alert("game over"); 
+console.log(gameState.moves);
+});
 }
 
-function markfield(event) {
+function addMark(selection, currentPlayer) {
+// var icon = document.createElement("i");
+//if no internet availabe:
+var icon = document.createElement("span");
+
+if(gameState.currentPlayer === "X") {
+    icon.classList.add("fas", "fa-times", "select", "fa-5x");
+    icon.innerHTML = "X";
+} 
+else if(gameState.currentPlayer === "O") {
+    icon.classList.add("far", "fa-circle", "select", "fa-5x");
+    icon.innerHTML = "O";
+
+}
+document.getElementById(selection).appendChild(icon);
+}
+
+function confirmWin() {
+var gamewinArr = Object.values(gameState.gameBoard);
+console.log(gamewinArr);
+//this function needs to terminate game and let player know they lost
+//horizontal win is an array that contains the index values for each square in row 1
+var horizontal = [0, 3, 6];
+for(let i = 0, len = horizontal.length; i < len; i++) {
+    let line = horizontal[i];
     
+     if (horizontal[i] === "") { return ""};
+     if(gamewinArr[line] === gamewinArr[line + 1] && gamewinArr[line] === gamewinArr[line + 2]){
+         console.log(horizontal.findIndex( found => {return found === horizontal[i]})); 
+         console.log(`winner, ganger! on row: ${horizontal.findIndex( found => { return found === horizontal[i]}) + 1}`);
+         return alert(`winner, ganger! on row: ${horizontal.findIndex( found => { return found === horizontal[i]}) + 1}`);
+        }
+    else {
+        console.log("nothing");
+    }        
+}
+// this will be used to determine if there is a win one the vertical lines
+var vertical = [0, 1, 3];
+for(let i = 0, len = vertical.length; i < len; i++) {
+let line = vertical[i];
+ if(gamewinArr[line] === gamewinArr[line + 3] && gamewinArr[line] === gamewinArr[line + 6]){
+     console.log(vertical.findIndex( found => {return found === horizontal[i]})); 
+     console.log(`winner, ganger! on line: ${horizontal.findIndex( found => { return found === vertical[i]})}`);
+     return alert("game over!");
+    }
+else {
+    console.log("nothing");
+    }   
 }
 
-var resetBtn = document.getElementById("restartBtn"); 
-    resetBtn.onclick = (event)=> { location.reload()};
+var diagonalOne = [0, 4, 8];
+var diagonalThree = [2, 4, 6];
+var center = gameState.gameBoard["four"]; 
 
-// ===============================================================
+if( gameState.moves > 5 && center !== ""){
+    checkDiagonal(diagonalOne);
+    checkDiagonal(diagonalThree);
+};
 
-//This will set the configurations of the game 
-// function setFig(id) {
-//     if (id === "X") {
-//         game.user = '<span class="fa fa-times"></span>';
-//         game.computer ='<span class="fa fa-circle-o></span>';
-//     } else if (id === "O") {
-//         game.user = '<span class="fa fa-circle-o></span>';
-//         game.computer = '<span class="fa fa-times></span>';
-//     }
-//     firstMove();
-//     setCurrPl('user');
-// }
+}
+function checkDiagonal(array) {
+var gamewinArr = Object.values(gameState.gameBoard);
+let diagonal = new Set();
+array.forEach( value => { diagonal.add( gamewinArr[value])});
 
-// function firstMove() {
-//     $('#fifth').html(game.computer);
-//     $('#fifth').removeAttr('onClick');
-// }
+if(diagonal.size === 1){
+    return alert(`winner, gange player ${diagonal[1]} has won`)
+}
+}
 
-// function setCurrPl(curr) {
-//     game.currentPlayer = curr;
-// }
 
-// function icon(id) {
-//     if(game.currentPlayer === 'user') {
-//         $('#' + id).html(game.user);
-//         $('#' + id).removeAttr('onClick');
-//         gameStatus();
-//         setCurrPl('computer');
-//     } else if (game.currentPlayer === 'computer') {
-//         $('#' + id).html(game.computer);
-//         $('#' + id).removeAttr('onClick');
-//         gameStatus();
-//         setCurrPl('user');
-//     }
-//     game.moves++;
-//     draw();
-
-//     if (game.currentPlayer == 'computer') {
-//         comp();
-//     }
-// }
-
-// function comp() {
-//     switch (true) {
-//         case $('#first').html() !== game.user && $('#first').html() !== game.computer
-//     }
+// function cpu() {
+var unoccupied = [];
+//spots available is equal to the gamefields spots cross referenced with the game boardspots
+gameState.gamefield.forEach( value => {
+    if( gameState.gameBoard[value] == undefined) {
+        unoccupied.push(value);
+        console.log(unoccupied);
+     };
+   });
 // }

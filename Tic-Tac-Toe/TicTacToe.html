@@ -11,32 +11,23 @@
 </head>
 <body>
     <header>
-        <h1>Tic-Tac-Toe</h1>
+        <h1 id="title">Tic-Tac-Toe</h1>
     </header>
-    <div id="game-config" class="id">
-        <form id="config-form" name="config-form">
-            <p>Would you like to be X or O?</p>
-            <label for="x"> X 
-                <input  type="radio" 
-                        name="user" 
-                        id="X" 
-                        value="X"/>
-            </label>
-            <label for="o"> O 
-                <input  type="radio" 
-                        name="user" 
-                        id="O" 
-                        value="O"/>
-            </label>
-            <input id="submit" type="submit" value="Let's Go"/>
-        </form>
-    </div>
     <main>
-        <div id="game-board" class=game-board>
+        <div id="gameConfigForm" class="id">
+            <form id="config-form" name="config-form">
+                <div class="closebtn">X</div>
+                <label for="user">Would you like to be X or O?</label>
+                        X <input  type="radio" name="user" id="X" value="X" required/>
+                        O <input  type="radio" name="user" id="O" value="O"/>
+                <!-- <label for="determineFirstPlayer"> Let's determine who will go first. Rock, paper or scissors?</label>
+                    <input type="text" name="determineFirstPlayer" id="response"/> -->
+                <input id="submit" type="submit" value="Let's Go" for="config-form"/>
+            </form>
+        </div>
+        <div id="game-board" class="game-board hidden">
             <span class="row">
-                <div id="one" class="game-field">
-                    <!-- <i class="fas fa-times fa-5x"></i> -->
-                </div>
+                <div id="one" class="game-field"></div>
                 <div id="two" class="game-field"></div>
                 <div id="three" class="game-field"></div>
             </span>
@@ -51,6 +42,7 @@
                 <div id="nine" class="game-field"></div>
             </span>
         </div>
+        <div class="hidden firstPlayer" id="modal"></div>
         <button id="restartBtn">Restart</button>
         <!-- <a href="Index.html" style="display:block">Back to mainpage</a> -->
     </main>

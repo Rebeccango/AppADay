@@ -1,116 +1,98 @@
-var game = {
-    user: "",
-    computer: "",
-    currentPlayer: "X", //default is the user 
-    moves: 0,
-    gamefield: [],
-    testset: {
-        "one": "",
-        "two": "",
-        "three": "",
-        "four":"",
-        "five":"",
-        "six": "",
-        "seven": "",
-        "eight":"",
-        "nine":""
-    }
-};      
+//data object that represents the games status
+    // will need to keep track of: the players and which symbol represents their turn
 
-//Set game configuration for user ( x or o)
-var form = document.getElementById("config-form");
-var gamefield = document.getElementById("game-board");
-
-form.onsubmit = (event) => {
-    event.preventDefault();
-
-    if(document.getElementById("X").checked) {
-        game.user  = "X";
-        game.computer = "O";
-    } else {
-        game.user  = "O";
-        game.computer = "X";
-    }
-};
-
-// initiate game 
-turn(game.currentPlayer);
-
-
-function turn(currentPlayer) {
-    gamefield.addEventListener('click', () => {
-    var evt = window.event || evt; 
-    !evt.target ? evt.target : evt.srcElement;
-    var gamefieldselect = evt.target.id;
-    // console.log(evt.target.id);
-    var selection = evt.target.id;
-    if(game.gamefield.includes(selection)) {
-        window.alert("you can't move there");
-        //I can use object method to deduct game values array.
-    } 
-    else {
-        addMark(selection, game.currentPlayer);
-        game.gamefield.push(gamefieldselect);
-        game.testset[gamefieldselect] = game.currentPlayer;
-        console.log(game.testset);
-    }
-    game.currentPlayer === "O"? game.currentPlayer = "X" : game.currentPlayer = "O";
-    game.moves++;
-    game.moves > 5 ? confirmWin() : console.log("continue playing");
-    if(game.moves === 9) alert("game over"); 
-    console.log(game.moves);
-    });
-}
-
-function addMark(selection, currentPlayer) {
-    // var icon = document.createElement("i");
-//if no internet availabe:
-    var icon = document.createElement("span");
-    
-    if(game.currentPlayer === "X") {
-        icon.classList.add("fas", "fa-times", "select", "fa-5x");
-        icon.innerHTML = "X";
-    } 
-    else if(game.currentPlayer === "O") {
-        icon.classList.add("far", "fa-circle", "select", "fa-5x");
-        icon.innerHTML = "O";
-
-    }
-    document.getElementById(selection).appendChild(icon);
-}
-
-function confirmWin() {
-    var gamewinArr = Object.values(game.testset);
-    console.log(gamewinArr);
-    //this function needs to terminate game and let player know they lost
-    //horizontal win is an array that contains the index values for each square in row 1
-    var horizontal = [0, 3, 6];
-    for(let i = 0, len = horizontal.length; i < len; i++) {
-        let line = horizontal[i];
-        
-         if (horizontal[i] === "") { return ""};
-         if(gamewinArr[line] === gamewinArr[line + 1] && gamewinArr[line] === gamewinArr[line + 2]){
-             console.log(horizontal.findIndex( found => {return found === horizontal[i]})); 
-             console.log(`winner, ganger! on row: ${horizontal.findIndex( found => { return found === horizontal[i]}) + 1}`);
-             return alert(`winner, ganger! on row: ${horizontal.findIndex( found => { return found === horizontal[i]}) + 1}`);
-            }
-        else {
-            console.log("nothing");
-        }        
-    }
- // this will be used to determine if there is a win one the vertical lines
- var vertical = [0, 1, 3];
- for(let i = 0, len = vertical.length; i < len; i++) {
-    let line = vertical[i];
-     if(gamewinArr[line] === gamewinArr[line + 3] && gamewinArr[line] === gamewinArr[line + 6]){
-         console.log(vertical.findIndex( found => {return found === horizontal[i]})); 
-         console.log(`winner, ganger! on line: ${horizontal.findIndex( found => { return found === vertical[i]}) + 1}`);
-         return alert("game over!");
+var gameState = {
+        moves: 1,   
+        player1: "",
+        player2: "",
+        currentPlayer: "",
+        gamefield: {
+            "one": "",
+            "two": "",
+            "three": "",
+            "four":"",
+            "five":"",
+            "six": "",
+            "seven": "",
+            "eight":"",
+            "nine":""
         }
-    else {
-        console.log("nothing");
-        }   
     }
+// Locate what items from the html we will need to reference
+    // list: form, form input, the boardgame, each individual field within the boardgame
+const configForm = document.getElementById("config-form");
+var userList = document.getElementsByName("user");
+const gameBoard = document.getElementById("game-board");
+const closebtn = document.querySelector(".closebtn");
+
+resetbtn = document.getElementById("restartBtn").onclick = () => { location.reload();};
+closebtn.addEventListener("click", () => {
+    console.log("should close modal");
+    document.getElementById("gameConfigForm").classList.add("hidden");
+});
+
+// Game flow 
+    //player needs to select which mark they want to be through form submission
+
+    configForm.onsubmit = (event) => {
+        event.preventDefault();
+        userList.forEach( mark => { mark.checked ? gameState.player1 = mark.id : gameState.player2 = mark.id;})
+        configForm.reset();
+        document.getElementById("gameConfigForm").classList.add("hidden");
+        gameBoard.classList.remove("hidden");
+        gameState.player1 !== ""? determineFirstPlayer() : console.log("waiting for player to select mark");
+        turn();
+        if( gameState.moves <=9) {
+            gameState.moves++; 
+            turn(); 
+         }
+         else {
+             prompt("You're both fired - it's a draw!");
+         }
+    }
+    
+    //a player will need to go first, we will select random from number from options
+    //game board will be available for selection
+    function determineFirstPlayer(event) {
+        var options = ["player1", "player2"];
+        gameState.currentPlayer = options[Math.floor(Math.random()*Math.floor(2))];
+        alert(`Donald Trump has spoken, ${gameState.currentPlayer} will go first!`)
+        return gameState.currentPlayer;
+    }
+
+// add event listeners to the boardfield, on each turn the following needs to happen
+        //person selects board,
+function turn() {
+    gameBoard.onclick =  ( )=> { 
+        var selection = locateSpot(); 
+        if (checkAvail(selection)) {
+            addMark(selection)
+        };
+        gameState.currentPlayer == "player1"? gameState.currentPlayer == "player2" : gameState.currentPlayer == "player1";
+    };
 }
 
-document.getElementById("restartBtn").onclick = () => { location.reload();};
+function addMark(validLocationId) {
+    var spot = document.getElementById(validLocationId),
+        span = document.createElement(span);
+        span.innerHTML = gameState[gameState.currentPlayer];
+        spot.appendChild(span);
+    // spot.classList.add(gameState[gameState.currentPlayer]);
+    gameState.gamefield[validLocationId] = gameState[gameState.currentPlayer];
+    console.log(validLocationId);
+}
+
+function checkAvail (gameBoardLocation) {
+   if(gameState.gamefield[gameBoardLocation] == ""){
+    return true
+    } else { 
+    return alert("Invalid move");
+    } 
+}
+
+function locateSpot() {
+    var evt = window.event || evt;
+    !event.target? evt.target :evt.srcElement;
+    var selection = evt.target.id;
+    return selection;
+}

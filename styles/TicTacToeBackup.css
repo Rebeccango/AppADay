@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Baloo Bhai', cursive;
+}
+
+body {
+  text-align: center;
+  background-color: cadetblue;
+  padding: 2rem;
+}
+
+body h1 {
+  font-size: 4rem;
+}
+
+body h1, body p {
+  margin: 1rem;
+}
+
+form label {
+  display: block;
+}
+
+form input {
+  margin-right: 2rem;
+}
+
+form #submit {
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border-style: none;
+}
+
+.game-board {
+  border-radius: 4px;
+  margin: 2.5rem;
+  display: inline-block;
+}
+
+.game-board .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.game-board .game-field {
+  display: inline-block;
+  outline: 8px solid black;
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  background-color: powderblue;
+}
+
+.game-field:hover {
+  background-color: grey;
+}
+
+#restartBtn {
+  display: block;
+  position: fixed;
+  left: 50vw;
+  bottom: 1rem;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding: 0.25rem;
+  border-radius: 4px;
+  border-style: none;
+}
+
+.cpu-turn {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(5, 5, 5, 0.5)), to(rgba(5, 5, 5, 0.5)));
+  background-image: linear-gradient(rgba(5, 5, 5, 0.5), rgba(5, 5, 5, 0.5));
+}
+
+.hidden {
+  display: none;
+}
+
+.select {
+  text-align: center;
+  vertical-align: center;
+}
+/*# sourceMappingURL=TicTacToeBackup.css.map */
