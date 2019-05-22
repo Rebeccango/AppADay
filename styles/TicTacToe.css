@@ -76,15 +76,6 @@ main {
   display: flex;
 }
 
-.game-board .game-field {
-  display: inline-block;
-  outline: 8px solid black;
-  border-radius: 5px;
-  width: 100px;
-  height: 100px;
-  background-color: whitesmoke;
-}
-
 .game-field:hover {
   background-color: grey;
 }
@@ -110,6 +101,26 @@ main {
           user-select: none;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(5, 5, 5, 0.5)), to(rgba(5, 5, 5, 0.5)));
   background-image: linear-gradient(rgba(5, 5, 5, 0.5), rgba(5, 5, 5, 0.5));
+}
+
+.far, .fas {
+  color: black;
+}
+
+.game-field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  outline: 8px solid black;
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  background-color: whitesmoke;
 }
 
 .hidden {

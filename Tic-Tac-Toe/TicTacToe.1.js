@@ -26,6 +26,7 @@ const gameBoard = document.getElementById("game-board");
 const closebtn = document.querySelector(".closebtn");
 
 resetbtn = document.getElementById("restartBtn").onclick = () => { location.reload();};
+
 closebtn.addEventListener("click", () => {
     console.log("should close modal");
     document.getElementById("gameConfigForm").classList.add("hidden");
@@ -56,7 +57,8 @@ closebtn.addEventListener("click", () => {
     function determineFirstPlayer(event) {
         var options = ["player1", "player2"];
         gameState.currentPlayer = options[Math.floor(Math.random()*Math.floor(2))];
-        alert(`Donald Trump has spoken, ${gameState.currentPlayer} will go first!`)
+        
+        document.getElementById("firstPlayerModal").innerHTML = `Through random selection, ${gameState.currentPlayer} will go first!`;
         return gameState.currentPlayer;
     }
 
@@ -91,7 +93,7 @@ function checkAvail (gameBoardLocation) {
 }
 
 function locateSpot() {
-    var evt = window.event || evt;
+    var evt = window.event || window.evt;
     !event.target? evt.target :evt.srcElement;
     var selection = evt.target.id;
     return selection;

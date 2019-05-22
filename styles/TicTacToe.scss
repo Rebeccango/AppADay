@@ -74,16 +74,8 @@ main {
     .row {
     display: flex;
     }
-    .game-field {
-      display: inline-block;    
-      outline: 8px solid black;
-      border-radius: 5px;
-      width: 100px;
-      height: 100px;
-      background-color: whitesmoke;
-    }
-}
 
+}
 
 .game-field:hover {
     background-color: grey;
@@ -112,7 +104,22 @@ main {
 // Modal 
 .modal {
     @extend #gameConfigForm;
-    
+}
+
+//Marker --------------------------------------------
+.far, .fas {
+    color: black;
+}
+
+.game-field {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    outline: 8px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    background-color: whitesmoke;
 }
 
 //General --------------------------------------------
