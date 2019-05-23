@@ -1,10 +1,9 @@
-var gameState = {
-    user: "",
-    computer: "",
-    currentPlayer: "X", //default is the user 
-    moves: 0,
-    gamefield: [],
-    gameBoard: {
+var game = {
+    move: 0,   
+    player1: "",
+    player2: "",
+    currentPlayer: "",
+    gamefield: {
         "one": "",
         "two": "",
         "three": "",
@@ -15,191 +14,118 @@ var gameState = {
         "eight":"",
         "nine":""
     }
-};      
-
-var title = document.getElementById("title");   
-var form = document.getElementById("config-form"),
- gamefield = document.getElementById("game-board");
-
-document.getElementById("restartBtn").onclick = () => { location.reload();};
-
-form.onsubmit = (event) => {
-event.preventDefault();
-
-if(document.getElementById("X").checked) {
-    gameState.user  = "X";
-    gameState.computer = "O";
-} else {
-    gameState.user  = "O";
-    gameState.computer = "X";
-}
-form.reset();
-form.classList.add('hidden');
-document.getElementById('gameConfigForm').classList.add('hidden');
-gamefield.classList.remove('hidden');
-var answer = prompt("Rock,paper or scissors?").charAt(0);
-console.log(answer);
-firstPlayer(answer);
-};
-
-function firstPlayer(ans) {
-var options = ["rock", "paper", "scissors"],
-cpuAns = options[Math.floor(Math.random()*Math.floor(3))];
-
-switch(ans) {
-    case 'r':
-    userAns = options[0];
-    console.log(`${userAns} vs. ${cpuAns}`);
-    break;
-
-    case 'p':
-    userAns = options[1];
-    console.log(`${userAns} vs. ${cpuAns}`);
-    break;
-
-    case 's':
-    userAns = options[2];
-    console.log(`${userAns} vs. ${cpuAns}`);
-    break;
-
-    default: 
-    window.alert("invalid response -- need new answer");
-    userAns = "";
-    userAns = alert("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0);
-    firstPlayer(userAns);
 }
 
-if(userAns === cpuAns){
-    window.alert("its a draw");
-    userAns = prompt("Now to determine who will go first. Rock, paper, or scissors? Type your response below").charAt(0) || "";
-    firstPlayer(userAns);
-} else if(userAns === options[0] && cpuAns === options[1]) {
-    gameState.currentPlayer = gameState.user;
-    window.alert(`${gameState.currentPlayer} won! Make your first move by selecting an available field below`);
-    return console.log("user wins, user gets to move first");
-}
-else if(userAns === options[1] && cpuAns === options[0]) {
-    gameState.currentPlayer = gameState.user;
-    window.alert(`${gameState.currentPlayer} won! Make your first move by selecting an available field below`);
-    return console.log("user wins, user gets to move first");
-}
-else if(userAns === options[2] && cpuAns === options[1]) {
-    gameState.currentPlayer =  gameState.user;
-    window.alert(`${gameState.currentPlayer} won! Make your first move by selecting an available field below`);
-    return console.log("user wins, user gets to move first");
-} else{
-    gameState.currentPlayer = gameState.computer;
-    window.alert(`${gameState.currentPlayer} won! You will go second`);
-    return console.log("userLoses, computer gets to go first");
-};    
-}
+const configForm = document.getElementById("config-form"),
+      ConfigFormModal = document.getElementById("gameConfigForm"),
+      charSelectList = document.getElementsByName("user"), // returns list
+        charSelectX = document.getElementById("X"), // returns list
+        charSelectY = document.getElementById("Y"), // returns list
+      gameboard = document.getElementById("game-board"),
+      closebtn = document.querySelector(".closebtn");
 
-turn(gameState.currentPlayer);
-
-
-function turn(currentPlayer) {
-gamefield.addEventListener('click', () => {
-    var evt = window.event || evt; 
-    !evt.target ? evt.target : evt.srcElement;
-    var gamefieldselect = evt.target.id;
-// console.log(evt.target.id);
-var selection = evt.target.id;
-if(gameState.gamefield.includes(selection)) {
-    window.alert("you can't move there");
-    //I can use object method to deduct game values array.
-} 
-else {
-    addMark(selection, gameState.currentPlayer);
-    gameState.gamefield.push(gamefieldselect);
-    gameState.gameBoard[gamefieldselect] = gameState.currentPlayer;
-    console.log(gameState.gameBoard);
-}
-gameState.currentPlayer === "O"? gameState.currentPlayer = "X" : gameState.currentPlayer = "O";
-gameState.moves++;
-gameState.moves > 5 ? confirmWin() : console.log("continue playing");
-if(gameState.moves === 9) alert("game over"); 
-console.log(gameState.moves);
-});
-}
-
-function addMark(selection, currentPlayer) {
-// var icon = document.createElement("i");
-//if no internet availabe:
-var icon = document.createElement("span");
-
-if(gameState.currentPlayer === "X") {
-    icon.classList.add("fas", "fa-times", "select", "fa-5x");
-    icon.innerHTML = "X";
-} 
-else if(gameState.currentPlayer === "O") {
-    icon.classList.add("far", "fa-circle", "select", "fa-5x");
-    icon.innerHTML = "O";
-
-}
-document.getElementById(selection).appendChild(icon);
-}
-
-function confirmWin() {
-var gamewinArr = Object.values(gameState.gameBoard);
-console.log(gamewinArr);
-//this function needs to terminate game and let player know they lost
-//horizontal win is an array that contains the index values for each square in row 1
-var horizontal = [0, 3, 6];
-for(let i = 0, len = horizontal.length; i < len; i++) {
-    let line = horizontal[i];
-    
-     if (horizontal[i] === "") { return ""};
-     if(gamewinArr[line] === gamewinArr[line + 1] && gamewinArr[line] === gamewinArr[line + 2]){
-         console.log(horizontal.findIndex( found => {return found === horizontal[i]})); 
-         console.log(`winner, ganger! on row: ${horizontal.findIndex( found => { return found === horizontal[i]}) + 1}`);
-         return alert(`winner, ganger! on row: ${horizontal.findIndex( found => { return found === horizontal[i]}) + 1}`);
-        }
-    else {
-        console.log("nothing");
-    }        
-}
-// this will be used to determine if there is a win one the vertical lines
-var vertical = [0, 1, 3];
-for(let i = 0, len = vertical.length; i < len; i++) {
-let line = vertical[i];
- if(gamewinArr[line] === gamewinArr[line + 3] && gamewinArr[line] === gamewinArr[line + 6]){
-     console.log(vertical.findIndex( found => {return found === horizontal[i]})); 
-     console.log(`winner, ganger! on line: ${horizontal.findIndex( found => { return found === vertical[i]})}`);
-     return alert("game over!");
+function gamePlay(event) {
+    gameconfig(event);
+    console.log("this is the game function");
+    if(game.move <= 4) {
+        turn(game.currentPlayer);
+    } 
+    else if(game.move > 4){
+        turn(game.currentPlayer);
+        console.log("great")
+        checkwinner();
     }
-else {
-    console.log("nothing");
-    }   
 }
 
-var diagonalOne = [0, 4, 8];
-var diagonalThree = [2, 4, 6];
-var center = gameState.gameBoard["four"]; 
+configForm.onsubmit = gamePlay;
 
-if( gameState.moves > 5 && center !== ""){
-    checkDiagonal(diagonalOne);
-    checkDiagonal(diagonalThree);
-};
+
+function gameconfig(event) {
+    event.preventDefault();
+
+    charSelectList.forEach( option => { 
+        option.checked? game.player1 = option.id: game.player2 = option.id
+    });
+
+    let options = ["player1", "player2"];
+    game.currentPlayer = options[Math.floor(Math.random()*Math.floor(2))];
+    alert(`Through random selection, ${game.currentPlayer} will go first!`);
+    
+    ConfigFormModal.classList.add("hidden");
+    gameboard.classList.remove("hidden");
+
+    configForm.reset();
+}
+
+function turn(player){
+    //player needs to select a spot by clicking on valid portion of the board
+    gameboard.onclick = () => {
+        var selection = locateSpot();
+        if(checkAvail(selection)) {
+            markSpot(selection,"I");
+            game.gamefield[selection] = game[game.currentPlayer];
+            game.currentPlayer === "player1"? game.currentPlayer = "player2" : game.currentPlayer = "player1";
+            game.move++;
+        } 
+        else {
+            alert("Invalid Selection, please select another spot");
+        }
+        return game; 
+    }
+}
+
+function checkAvail(validElementId) {
+    return game.gamefield[validElementId] == "";
+}
+
+function locateSpot() {
+    var evt = window.event || window.evt;
+    !event.target? evt.target:evt.srcElement;
+    var selection = evt.target.id;
+    return selection;
+}
+
+function markSpot(validElementId, HTMLElement) {
+    //create the item, based on the player mark.    agg
+    var marker = document.createElement(HTMLElement);  
+    if(navigator.onLine) {
+        game[game.currentPlayer] == "X"? marker.classList.add("fas", "fa-times", "fa-4x"): marker.classList.add("far", "fa-circle", "fa-4x");
+    } 
+    else {
+        game[game.currentPlayer] == "X"? marker.innerHTML = "X": marker.innerHTML = "O";
+    }
+    document.getElementById(validElementId).appendChild(marker);
+    return marker;
+}
+
+function checkwinner() {
+    //vertical - takes every index and then adds on 3 spots
+    lineWin([0, 1, 2], 3); 
+    // horizontal line - takes every index in array and ads on one spot for 
+    lineWin([0, 3, 6], 1);
+    //diagonal
+}
+
+function lineWin( arrayOfIndex, num){
+    let threeInaRow = new Set();
+    let boardgameArr = Object.values(game.gamefield);
+    
+    for(let i = 0, len = arrayOfIndex.length; i < len; i++) {
+    threeInaRow.add(boardgameArr[arrayOfIndex[i]]);
+    threeInaRow.add(boardgameArr[arrayOfIndex[i] + num]);
+    threeInaRow.add(boardgameArr[arrayOfIndex[i] + num + num]);
+    
+    threeInaRow.size === 1? alert(`Winner detected. Game over!`): threeInaRow.clear();
+    }
+}   
+
+function diagonal ( cornerSquareId ) {
+
+let center = "five";
+//  corner square Id's include 
+let backslash = ["one", "three"], 
+test = ["seven", "nine"];
+    // starting from first square 
+    //starting from third square
 
 }
-function checkDiagonal(array) {
-var gamewinArr = Object.values(gameState.gameBoard);
-let diagonal = new Set();
-array.forEach( value => { diagonal.add( gamewinArr[value])});
-
-if(diagonal.size === 1){
-    return alert(`winner, gange player ${diagonal[1]} has won`)
-}
-}
-
-
-// function cpu() {
-var unoccupied = [];
-//spots available is equal to the gamefields spots cross referenced with the game boardspots
-gameState.gamefield.forEach( value => {
-    if( gameState.gameBoard[value] == undefined) {
-        unoccupied.push(value);
-        console.log(unoccupied);
-     };
-   });
-// }
